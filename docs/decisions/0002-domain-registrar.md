@@ -5,7 +5,7 @@
 
 ## Context
 
-The site needs a custom domain. GitHub Pages only needs DNS records, so any registrar works.
+The site needs a custom domain. Wasmer Edge only needs DNS records pointing at it, so any registrar works.
 
 ## Options
 

@@ -1,0 +1,8 @@
+# Wasmer package: serve the Astro build output (dist/) with static-web-server.
+# Run `npm run build` first. Local test: `wasmer run . -- --port 9000`.
+
+[dependencies]
+"wasmer/static-web-server" = "^1"
+
+[fs]
+"/public" = "dist"

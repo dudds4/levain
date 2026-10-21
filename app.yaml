@@ -1,0 +1,6 @@
+kind: wasmer.io/App.v0
+# Wasmer username or namespace that owns the app.
+owner: dudds4
+name: levain
+# Deploy the package defined by wasmer.toml in this directory.
+package: .
