@@ -1,0 +1,35 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getProjects, url } from '../../lib';
+
+export async function getStaticPaths() {
+	const projects = await getProjects();
+	return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { title, summary, date, tags, repo, url: liveUrl } = project.data;
+const { Content } = await render(project);
+---
+
+<Base title={title} description={summary}>
+	<p><a href={url('/')}>← All projects</a></p>
+	<h1>{title}</h1>
+	<p class="muted">{summary}</p>
+	<p class="links">
+		<span class="muted">{date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+		{repo && <a href={repo}>Source</a>}
+		{liveUrl && <a href={liveUrl}>Live</a>}
+	</p>
+	{tags.length > 0 && <ul class="tags">{tags.map((t) => <li>{t}</li>)}</ul>}
+	<article>
+		<Content />
+	</article>
+</Base>
+
+<style>
+	h1 { margin-bottom: 0.25rem; }
+	.links { display: flex; gap: 1rem; font-size: 0.95rem; }
+	article { margin-top: 2rem; }
+</style>

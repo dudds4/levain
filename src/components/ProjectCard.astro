@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { url } from '../lib';
+
+interface Props {
+	project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, date, tags } = project.data;
+---
+
+<article class="card">
+	<h3><a href={url(`projects/${project.id}/`)}>{title}</a></h3>
+	<p>{summary}</p>
+	<p class="muted meta">{date.getFullYear()}</p>
+	{tags.length > 0 && <ul class="tags">{tags.map((t) => <li>{t}</li>)}</ul>}
+</article>
+
+<style>
+	.card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+	h3 { margin: 0 0 0.25rem; font-size: 1.1rem; }
+	h3 a { color: var(--fg); text-decoration: none; }
+	h3 a:hover { color: var(--accent); }
+	p { margin: 0; }
+	.meta { font-size: 0.85rem; margin-top: 0.4rem; }
+</style>
